@@ -15,15 +15,26 @@ def shape_array(shape, mean, stan_dev):
     return np.full(shape, mean) + stan_dev #np.full: creates the shape array with the specified value
 
 def cramers_rule(coe_matrix, conts):
-    determaint = np.linalg.det(coe_matrix)
+    """
+    Solves a system of linear equations using Cramer's Rule formula.
+
+    Args:
+        coe_matrix: Coefficient matrix.
+        conts: Constants.
+
+    Returns:
+        The answer of the system of linear equations using Cramer's Rule formula.
+    """
+    determinant = np.linalg.det(coe_matrix) #np.linalg.det: gets the determinant of coefficients 
 
     num_vals = coe_matrix.shape[1]
     answer = []
 
     for i in range(num_vals):
+        # Calculating the answer using the cramers rule
         temp = coe_matrix.copy()
         temp[:, i] = conts
-        answer.append(np.linalg.det(temp) / determaint)
+        answer.append(np.linalg.det(temp) / determinant)
     
     return answer
 
