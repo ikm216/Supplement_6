@@ -22,4 +22,13 @@ def test_should_return_specified_shape_array():
 
     assert shape_arr.shape == shape
     assert np.all(shape_arr == mean + stan_dev) #np.all: tests all values in the array evaulate to true with a specified axis 
+
+def test_should_return_negative1_4_from_cramers_rule():
+    coe_matrix = np.array([5, 3], [3, -5])
+    conts = np.array([7, -23])
+
+    correct_answer = np.array([-1, 4])
+    answer = cramers_rule(coe_matrix, conts)
+
+    assert np.allclose(answer, correct_answer)
     
