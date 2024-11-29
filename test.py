@@ -1,6 +1,7 @@
 import numpy as np
 
-
+def shape_array(shape, mean, stan_dev):
+    return np.full(shape, mean) + stan_dev
 
 def test_should_return_specified_shape_array():
     shape = (10,10)
