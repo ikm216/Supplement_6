@@ -1,7 +1,18 @@
 import numpy as np
 
 def shape_array(shape, mean, stan_dev):
-    return np.full(shape, mean) + stan_dev
+    """
+    Creates an array filled with specified value of mean and standard deviation.
+
+    Args:
+        shape: Shape of the array.
+        mean: Value to fill the array with.
+        stan_dev: Standard deviation.
+
+    Returns:
+        Array filled with values following mean and simulated deviation.
+    """
+    return np.full(shape, mean) + stan_dev #np.full: creates the shape array with the specified value
 
 def test_should_return_specified_shape_array():
     shape = (10,10)
@@ -10,5 +21,5 @@ def test_should_return_specified_shape_array():
     shape_arr = shape_array(shape, mean, stan_dev)
 
     assert shape_arr.shape == shape
-    assert np.all(shape_arr == mean + stan_dev)
-
+    assert np.all(shape_arr == mean + stan_dev) #np.all: tests all values in the array evaulate to true with a specified axis 
+    
