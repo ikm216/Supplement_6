@@ -14,7 +14,18 @@ def shape_array(shape, mean, stan_dev):
     """
     return np.full(shape, mean) + stan_dev #np.full: creates the shape array with the specified value
 
+def cramers_rule(coe_matrix, conts):
+    determaint = np.linalg.det(coe_matrix)
 
+    num_vals = coe_matrix.shape[1]
+    answer = []
+
+    for i in range(num_vals):
+        temp = coe_matrix.copy()
+        temp[:, i] = conts
+        answer.append(np.linalg.det(temp) / determaint)
+    
+    return answer
 
 def test_should_return_specified_shape_array():
     shape = (10,10)
