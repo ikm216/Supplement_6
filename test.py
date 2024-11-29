@@ -39,14 +39,27 @@ def cramers_rule(coe_matrix, conts):
     return answer
 
 def shape_array_even_odd(shape, even, odd):
+    """
+    Creates array of a given shape filled with even and odd numbers.
+
+    Args:
+        shape: Shape of the array.
+        even: The value to use for even positions.
+        odd: The value to use for odd positions.
+
+    Returns:
+        The new array, even indexes list, and odd indexes list.
+    """
     even_arr = np.full(shape, even)
     odd_arr = np.full(shape, odd)
 
-    mask = np.indices(shape).sum(axis=0) % 2 == 0
+    # Mask: boolean array to indentify the even positions
+    mask = np.indices(shape).sum(axis=0) % 2 == 0 # np.indices: generates a grid of indices in the shape
 
-    arr2 = np.where(mask, even_arr, odd_arr)
+    arr2 = np.where(mask, even_arr, odd_arr) # np.where: returns the values depending on the condition is True or false
 
-    even_index = np.argwhere(mask)
+    # np.argwhere: returns the indices of values in the shape depending on the condition is True
+    even_index = np.argwhere(mask) 
     odd_index = np.argwhere(~mask)
 
     return arr2, even_index, odd_index
@@ -82,6 +95,7 @@ def test_should_return_indexes_even_odd_numbers_separate_lists_newly_generated_a
     arr, even_index, odd_index = shape_array_even_odd(shape, even, odd)
 
     assert arr.shape == shape
+    # arr[tuple(idx)]: idx is a tuple of indexes of the even and odd numbers
     assert all(arr[tuple(idx)] == even for idx in even_index)
     assert all(arr[tuple(idx)] == odd for idx in odd_index)
     for idx in even_index:
