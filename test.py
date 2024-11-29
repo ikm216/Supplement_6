@@ -50,9 +50,29 @@ def test_should_return_specified_shape_array():
 def test_should_return_negative1_4_from_cramers_rule():
     coe_matrix = np.array([[5, 3], [3, -5]])
     conts = np.array([7, -23])
+    # System equation
+    # 5x + 3y = 7
+    # 3x - 5y = -23
 
     correct_answer = np.array([-1, 4])
+    # x = -1, y = 4
+
     answer = cramers_rule(coe_matrix, conts)
 
     assert np.allclose(answer, correct_answer)
+
+def test_should_return_indexes_even_odd_numbers_separate_lists_newly_generated_array():
+    shape = (10,10)
+    even = 2
+    odd = 1
+
+    arr, even_index, odd_index = shape_array_even_odd(shape, even, odd)
+
+    assert arr.shape == shape
+    assert all(arr[tuple(idx)] == even for idx in even_index)
+    assert all(arr[tuple(idx)] == odd for idx in odd_index)
+    for idx in even_index:
+        assert arr[tuple(idx)] % 2 == 0
+    for idx in odd_index:
+        assert arr[tuple(idx)] % 2 != 0
     
