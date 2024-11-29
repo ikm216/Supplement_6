@@ -38,6 +38,19 @@ def cramers_rule(coe_matrix, conts):
     
     return answer
 
+def shape_array_even_odd(shape, even, odd):
+    even_arr = np.full(shape, even)
+    odd_arr = np.full(shape, odd)
+
+    mask = np.indices(shape).sum(axis=0) % 2 == 0
+
+    arr2 = np.where(mask, even_arr, odd_arr)
+
+    even_index = np.argwhere(mask)
+    odd_index = np.argwhere(~mask)
+
+    return arr2, even_index, odd_index
+
 def test_should_return_specified_shape_array():
     shape = (10,10)
     mean = 5
